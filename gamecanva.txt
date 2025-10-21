@@ -1,0 +1,60 @@
+import { useEffect } from "react";
+import makeKaplayCtx from "../kaplayCtx";
+import makePlayer from "../makePlayer";
+
+export default function GameCanvas() {
+  useEffect(() => {
+    if (window.__kaplay_initialized__) return;
+    window.__kaplay_initialized__ = true;
+
+    const k = makeKaplayCtx();
+
+    // --- Load sprites ---
+    k.loadSprite("background", "/sprites/background.png");
+    k.loadSprite("player", "/sprites/player/spritesheet.png", {
+      sliceX: 8,
+      sliceY: 3,
+      anims: {
+        "idle": { from: 0, to: 7, loop: true},
+        "run": { from: 8, to: 13, loop: true},
+        "attack": { from: 16, to: 19, loop: false},
+      },
+    });
+
+    // --- Scene ---
+    k.scene("fight", () => {
+      k.add([k.sprite("background"), k.pos(0, 0), k.scale(1.87)]);
+
+      // Add player
+      makePlayer(k, k.vec2(200, 650), 300);
+
+      // Optional: invisible floor for collision
+      k.add([
+        k.pos(0, 700),
+        k.rect(k.width, 50),
+        k.area(),
+        k.body({ isStatic: true }),
+        k.opacity(0),
+      ]);
+    });
+
+    k.go("fight");
+  }, []);
+
+  return null;
+}
+
+
+
+// position of healtbar 
+//ai for ai and player for player
+ const barY = player.pos.y +80;
+    const barX = player.pos.x +200;
+    barBg.pos = k.vec2(barX, barY);
+    bar.pos = k.vec2(barX, barY);
+    bar.width = 70 * (health / 100);
+
+    const barY = ai.pos.y +50; // closer to the head
+    const barX = ai.pos.x +200;
+    barBg.pos = k.vec2(barX, barY);
+    bar.pos = k.vec2(barX, barY);

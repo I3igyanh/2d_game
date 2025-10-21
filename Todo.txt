@@ -1,0 +1,16 @@
+background and canvas setup ✅
+player model ✔
+spritesheet and background png ✔
+check if the spritesheet work ✔
+idle anim, run anim, attack anim working ✔
+movement and controls for player ✔
+make an ai controlled character ✔
+make ai move towards pplayer and attack ✔
+remove the huge collision space from k.body ✔
+add healthbar ✔
+position the healthbar ✔
+add logic to healtbar✔
+run tests for every logic ✔
+optimaization needed player frames freezes sometimes ❌
+jump  needs to be added ❌
+guard or block to be addded ❌
