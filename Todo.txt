@@ -14,3 +14,4 @@ run tests for every logic ✔
 optimaization needed player frames freezes sometimes ❌
 jump  needs to be added ❌
 guard or block to be addded ❌
+push to github 
