@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import makeKaplayCtx from "../kaplayCtx";
 import makePlayer from "../makePlayer";
-import makeAIPlayer from "../makeAIPlayer"; // ⬅️ new import
+import makeAIPlayer from "../makeAIPlayer"; 
 
 export default function GameCanvas() {
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function GameCanvas() {
       k.add([k.sprite("background"), k.pos(0, 0), k.scale(1.87)]);
 
       const player = makePlayer(k, k.vec2(200, 650), 400);
-      makeAIPlayer(k, k.vec2(900, 650), 250, player); // ⬅️ AI added here
+      makeAIPlayer(k, k.vec2(900, 650), 250, player); // AI added here
 
       k.add([
         k.pos(0, 700),

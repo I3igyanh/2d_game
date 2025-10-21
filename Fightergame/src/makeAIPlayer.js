@@ -12,7 +12,7 @@ export default function makeAIPlayer(k, posVec2, speed, target) {
   let direction = 0;
   let health = 100;
 
-  // --- Health bar ---
+  // Health bar
   const barBg = k.add([
     k.rect(120, 6),
     k.color(100, 0, 0),
@@ -29,14 +29,14 @@ export default function makeAIPlayer(k, posVec2, speed, target) {
     { z: 11 },
   ]);
 
-  // --- Helper for animations ---
+  // Helper for animations
   const playAnim = (anim, loop = true) => {
     if (ai.getCurAnim()?.name !== anim) {
       ai.play(anim, { loop });
     }
   };
 
-  // --- Damage pop-up text ---
+  // Damage pop-up text
   function showDamageText(amount, pos) {
     const dmgText = k.add([
       k.text(`-${amount}`, { size: 16 }),
@@ -50,7 +50,7 @@ export default function makeAIPlayer(k, posVec2, speed, target) {
     k.wait(0.6, () => dmgText.destroy());
   }
 
-  // --- Update logic ---
+  // Update logic
   ai.onUpdate(() => {
     if (!target.exists()) return;
 
@@ -68,7 +68,7 @@ export default function makeAIPlayer(k, posVec2, speed, target) {
       }
     }
 
-    // --- Attack logic ---
+    // Attack logic
     if (absDist <= 120 && !attacking) {
       attacking = true;
       playAnim("attack", false);
@@ -88,20 +88,20 @@ export default function makeAIPlayer(k, posVec2, speed, target) {
       });
     }
 
-    // --- Random jump for variety ---
+    // Random jump for variety
     if (Math.random() < 0.002 && ai.isGrounded()) {
       ai.jump();
     }
 
-    // --- Update health bar position ---
-    const barY = ai.pos.y +50; // closer to the head
+    // Update health bar position
+    const barY = ai.pos.y +50; 
     const barX = ai.pos.x +200;
     barBg.pos = k.vec2(barX, barY);
     bar.pos = k.vec2(barX, barY);
     bar.width = 120 * (health / 100);
   });
 
-  // --- Handle AI taking damage ---
+  // Handle AI taking damage
   ai.hurt = (amount) => {
     health = Math.max(0, health - amount);
     showDamageText(amount, ai.pos);

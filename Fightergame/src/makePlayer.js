@@ -11,7 +11,7 @@ export default function makePlayer(k, posVec2, speed) {
   let attacking = false;
   let health = 100;
 
-  // --- Health bar ---
+  // Health bar
   const barBg = k.add([
     k.rect(120, 10),
     k.color(100, 0, 0),
@@ -28,7 +28,7 @@ export default function makePlayer(k, posVec2, speed) {
     { z: 11 },
   ]);
 
-  // --- Floating damage text ---
+  // Floating damage text
   function showDamageText(amount, pos) {
     const dmgText = k.add([
       k.text(`-${amount}`, { size: 16 }),
@@ -42,7 +42,7 @@ export default function makePlayer(k, posVec2, speed) {
     k.wait(0.6, () => dmgText.destroy());
   }
 
-  // --- Animation helper ---
+  // Animation helper
   const playAnim = (anim, loop = true) => {
     if (player.getCurAnim()?.name !== anim) {
       player.play(anim, { loop });
@@ -56,7 +56,7 @@ export default function makePlayer(k, posVec2, speed) {
     }
   });
 
-  // --- Attack ---
+  // Attack
   k.onKeyPress("space", () => {
     if (attacking) return;
     attacking = true;
@@ -74,9 +74,9 @@ export default function makePlayer(k, posVec2, speed) {
     });
   });
 
-  // --- Movement ---
+  // Movement
   k.onUpdate(() => {
-    if (attacking) return; // don’t override attack anim
+    if (attacking) return; // don’t override attack anim whic causes freeze frame
 
     let dx = 0;
     if (k.isKeyDown("ArrowRight") || k.isKeyDown("d")) dx += 1;
@@ -102,7 +102,7 @@ export default function makePlayer(k, posVec2, speed) {
     bar.width = 120 * (health / 100);
   });
 
-  // --- Player taking damage ---
+  // Player taking damage
   player.hurt = (amount) => {
     health = Math.max(0, health - amount);
     showDamageText(amount, player.pos);
